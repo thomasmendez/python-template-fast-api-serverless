@@ -13,6 +13,8 @@ env-mac: # @HELP python make virtualenv locally mac
 env-mac:
 	python3 -m pip install --user virtualenv
 	python3 -m venv env
+	source env/bin/activate
+	pip install -r requirements.txt
 
 serve: # @HELP python run locally
 serve:
