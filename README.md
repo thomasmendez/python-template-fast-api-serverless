@@ -1,6 +1,6 @@
 # Python FastAPI Starter Project (Serverless)
 
-Simple Python FastAPI Starter Project Intended for AWS Serverless Development 
+Simple Python FastAPI Starter Project Intended for AWS Serverless Development
 
 ## Run Locally
 
@@ -28,7 +28,16 @@ Run `make serve` in order to run the project locally
 
 ## Build
 
-To build the project run `make build`
+To build the project (zip file) run
+
+```
+cd env/lib/python3.7/site-packages/
+zip -r9 ../../../../function.zip .
+cd ../../../../
+zip -g ./function.zip -r app
+```
+
+_Note: The `zip` command only work with Linux machines (not Windows)_
 
 ## Tests
 
