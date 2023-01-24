@@ -16,7 +16,7 @@ env-mac:
 
 serve: # @HELP python run locally
 serve:
-	uvicorn main:app --reload
+	uvicorn app.main:app --reload
 
 test: # @HELP python run application test
 test:
