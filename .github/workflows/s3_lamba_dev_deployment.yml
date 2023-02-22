@@ -70,13 +70,13 @@ jobs:
         uses: montudor/action-zip@v1
 
       - name: Zip output
-        # run: zip -qq -r function.zip dist node_modules package.json
-        # working-directory: /home/runner/.local/lib/python3.10/site-packages
+        # run: |
+        #   cd /home/runner/.local/lib/python3.10/site-packages
+        #   zip -r9 ../../../../function.zip .
+        #   cd ../../../../
+        #   zip -g ./function.zip -r app
         run: |
-          cd /home/runner/.local/lib/python3.10/site-packages
-          zip -r9 ../../../../function.zip .
-          cd ../../../../
-          zip -g ./function.zip -r app
+          pwd
 
       - name: Create dist Artifact
         uses: actions/upload-artifact@v3
