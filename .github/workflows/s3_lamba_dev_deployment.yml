@@ -61,7 +61,10 @@ jobs:
 
       - name: Make Virtual Environment
         run: |
-          make env-linux
+          pip install --upgrade pip
+          python3 -m venv env
+          source env/bin/activate
+          echo "VIRTUAL ENV:" $VIRTUAL_ENV
 
       - name: Build App
         run: |
