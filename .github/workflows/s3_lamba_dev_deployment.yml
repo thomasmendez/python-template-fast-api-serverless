@@ -59,6 +59,10 @@ jobs:
       #   run: |
       #     pytest
 
+      - name: Make Virtual Environment
+        run: |
+          make env-linux
+
       - name: Build App
         run: |
           make build
