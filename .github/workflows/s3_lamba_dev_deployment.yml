@@ -82,18 +82,7 @@ jobs:
           cd /home/runner/.local/lib/python3.10/site-packages
           zip -r9 ../../../../function.zip .
           cd ../../../../
-          pwd
-          ls
-          cd ./work
-          pwd
-          ls
-          cd ./python-template-fast-api-serverless-aws
-          pwd
-          ls
-          cd ./python-template-fast-api-serverless-aws
-          pwd
-          ls
-          zip -g ./function.zip -r /work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws/app
+          zip -g function.zip -r ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws/app
 
       - name: Create dist Artifact
         uses: actions/upload-artifact@v3
