@@ -24,9 +24,9 @@ test: # @HELP python run application test
 test:
 	python test ./... -count=1 -v
 
-# build: # @HELP build application binary and place in bin directory
-# build:
-# 	cd env/lib/python3.7/site-packages/
-# 	zip -r9 ../../../../function.zip .
-# 	cd ../../../../
-# 	zip -g ./function.zip -r app
+build: # @HELP build application binary and place in bin directory
+build:
+	cd env/lib/python3.7/site-packages/
+	zip -r9 ../../../../function.zip .
+	cd ../../../../
+	zip -g ./function.zip -r app
