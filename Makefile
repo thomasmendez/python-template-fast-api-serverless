@@ -34,6 +34,6 @@ build:
 build-ci-cd: # @HELP build application binary and place in bin directory
 build-ci-cd:
 	cd /home/runner/.local/lib/python3.10/site-packages
-	zip -r9 ../../../../function.zip . -x
+	zip -r9 ../../../../function.zip .
 	cd ../../../../
-	zip -g ./function.zip -r app -x 
+	zip -g ./function.zip -r app 
