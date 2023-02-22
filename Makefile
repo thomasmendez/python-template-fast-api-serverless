@@ -9,8 +9,8 @@ env-windows:
 	py -m pip install --user virtualenv
 	py -m venv env
 
-env-mac: # @HELP python make virtualenv locally mac
-env-mac:
+env-linux: # @HELP python make virtualenv locally linux/mac
+env-linux:
 	python3 -m pip install --user virtualenv
 	python3 -m venv env
 	source env/bin/activate
