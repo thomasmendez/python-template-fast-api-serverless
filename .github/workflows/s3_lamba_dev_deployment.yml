@@ -94,6 +94,9 @@ jobs:
       #   uses: actions/checkout@v3
       #   with:
       #     repository: thomasmendez/workflows
+      - name: Current dir
+        id: pwd
+        run: pwd
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
