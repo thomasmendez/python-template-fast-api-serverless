@@ -239,11 +239,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Retrieve dist files
-        uses: actions/download-artifact@v3
-        with:
-          name: ${{ needs.pre_build.outputs.DIST_NAME }}
-          path: ${{ needs.pre_build.outputs.DIST_PATH }}
+      # - name: Retrieve dist files
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: ${{ needs.pre_build.outputs.DIST_NAME }}
+      #     path: ${{ needs.pre_build.outputs.DIST_PATH }}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
