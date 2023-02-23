@@ -9,7 +9,7 @@ jobs:
   pre_build:
     runs-on: ubuntu-latest
     env:
-      AWS_BUCKET_NAME: python-template-fast-api-serverless-aws-dev
+      AWS_BUCKET_NAME: python-serverless-aws-dev
       DIST_NAME: function-dev
       DIST_PATH: function.zip
     outputs:
