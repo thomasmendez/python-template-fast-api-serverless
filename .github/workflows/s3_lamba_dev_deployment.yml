@@ -9,7 +9,7 @@ jobs:
   pre_build:
     runs-on: ubuntu-latest
     env:
-      AWS_BUCKET_NAME: my-serverless-aws-dev
+      AWS_BUCKET_NAME: python-template-fast-api-serverless-aws-dev
       DIST_NAME: function-dev
       DIST_PATH: function.zip
     outputs:
@@ -120,7 +120,7 @@ jobs:
           export AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
           export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           export AWS_DEFAULT_REGION="us-east-2"
-          terraform -chdir=terraform/development/remote plan -var="aws_bucket_name=${{ inputs.AWS_BUCKET_NAME }}" -no-color
+          terraform -chdir=terraform/development/remote plan -var="aws_bucket_name=${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}" -no-color
         continue-on-error: true
 
       - name: Update Pull Request - Existing Bucket
@@ -175,7 +175,7 @@ jobs:
           export AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
           export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           export AWS_DEFAULT_REGION="us-east-2"
-          terraform -chdir=terraform/development/create plan -var="aws_bucket_name=${{ inputs.AWS_BUCKET_NAME }}" -no-color
+          terraform -chdir=terraform/development/create plan -var="aws_bucket_name=${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}" -no-color
         continue-on-error: true
 
       - name: Update Pull Request - Create Bucket
@@ -219,8 +219,8 @@ jobs:
           export AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
           export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           export AWS_DEFAULT_REGION="us-east-2"
-          terraform -chdir=terraform/development/remote import -var="aws_bucket_name=${{ inputs.AWS_BUCKET_NAME }}" aws_s3_bucket.bucketdev ${{ inputs.AWS_BUCKET_NAME }}
-          terraform -chdir=terraform/development/remote apply -var="aws_bucket_name=${{ inputs.AWS_BUCKET_NAME }}" -auto-approve
+          terraform -chdir=terraform/development/remote import -var="aws_bucket_name=${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}" aws_s3_bucket.bucketdev ${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}
+          terraform -chdir=terraform/development/remote apply -var="aws_bucket_name=${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}" -auto-approve
 
       - name: Terraform Apply - Create Bucket
         id: apply-create
@@ -229,7 +229,7 @@ jobs:
           export AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
           export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           export AWS_DEFAULT_REGION="us-east-2"
-          terraform -chdir=terraform/development/create apply -var="aws_bucket_name=${{ inputs.AWS_BUCKET_NAME }}" -auto-approve
+          terraform -chdir=terraform/development/create apply -var="aws_bucket_name=${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}" -auto-approve
 
   sync_s3_dev:
     runs-on: ubuntu-latest
@@ -242,8 +242,8 @@ jobs:
       - name: Retrieve dist files
         uses: actions/download-artifact@v3
         with:
-          name: ${{ inputs.DIST_NAME }}
-          path: ${{ inputs.DIST_PATH }}
+          name: ${{ needs.pre_build.outputs.DIST_NAME }}
+          path: ${{ needs.pre_build.outputs.DIST_PATH }}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -251,4 +251,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
       - name: Deploy static site to S3 bucket
-        run: aws s3 sync ${{ inputs.DIST_PATH }} s3://${{ inputs.AWS_BUCKET_NAME }}
+        run: aws s3 sync ${{ needs.pre_build.outputs.DIST_PATH }} s3://${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}
