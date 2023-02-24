@@ -248,6 +248,11 @@ jobs:
       #   with:
       #     name: ${{ needs.pre_build.outputs.DIST_NAME }}
       #     path: ${{ needs.pre_build.outputs.DIST_PATH }}
+    
+      - name: Where is my file
+        run: |
+          pwd
+          ls
           
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
