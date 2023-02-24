@@ -36,10 +36,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Use Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10.10'
+      # - name: Use Python
+      #   uses: actions/setup-python@v4
+      #   id: cp310
+      #   with:
+      #     python-version: '3.10.10'
+      #     cache: 'pip'
+      # - run: pip install -r requirements.txt
+      # - run: pipx run --python '${{ steps.cp310.outputs.python-path }}' nox --version
 
       - name: Install dependencies
         run: |
