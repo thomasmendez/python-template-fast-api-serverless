@@ -243,18 +243,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Retrieve dist files
-        uses: actions/download-artifact@v3
-        with:
-          name: ${{ needs.pre_build.outputs.DIST_NAME }}
-          path: dist/
+      # - name: Retrieve dist files
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: ${{ needs.pre_build.outputs.DIST_NAME }}
+      #     path: ${{ needs.pre_build.outputs.DIST_PATH }}
     
       - name: Where is my file
         run: |
           pwd
           ls
-          cd dist/
-          ls
+
+      - name: Move file
+        run: |
+          mkdir dist
+          mv function.zip dist
           
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -263,4 +266,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
       - name: Deploy lambda function to S3 bucket
-        run: aws s3 sync dist/function-dev.zip s3://${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}
+        run: sudo aws s3 sync dist/function.zip s3://${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}
