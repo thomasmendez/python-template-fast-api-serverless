@@ -236,7 +236,7 @@ jobs:
           terraform -chdir=terraform/development/create apply -var="aws_bucket_name=${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}" -auto-approve
 
   sync_s3_dev:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     needs: [pre_build, build, configure_s3_dev]
     if: github.ref != 'refs/heads/main'
     env:
