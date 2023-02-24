@@ -239,6 +239,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [pre_build, build, configure_s3_dev]
     if: github.ref != 'refs/heads/main'
+    env:
+      WS_EC2_METADATA_DISABLED: true
     steps:
       - name: Checkout
         uses: actions/checkout@v3
