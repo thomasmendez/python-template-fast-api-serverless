@@ -260,6 +260,9 @@ jobs:
         run: |
           mkdir dist
           mv function.zip dist
+          cd dist
+          ls
+          touch function.txt
           
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -268,4 +271,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
       - name: Deploy lambda function to S3 bucket
-        run: aws s3 sync dist/function.zip s3://${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}
+        run: aws s3 sync dist/function.txt s3://${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}
