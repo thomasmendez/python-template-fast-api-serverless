@@ -20,6 +20,10 @@ jobs:
       AWS_BUCKET_NAME: ${{ steps.bucket_name.outputs.bucket }}
       DIST_NAME: ${{ env.DIST_NAME }}
       DIST_PATH: ${{ env.DIST_PATH }}
+      AWS_LAMBDA_FUNCTION_S3_KEY: ${{ env.AWS_LAMBDA_FUNCTION_S3 }}
+      AWS_LAMBDA_FUNCTION_NAME: ${{ env.AWS_LAMBDA_FUNCTION_S3_NAME }
+      AWS_LAMBDA_FUNCTION_HANDLER: ${{ env.AWS_LAMBDA_FUNCTION_HANDLER }}
+      AWS_LAMBDA_FUNCTION_RUNTIME: ${{ env.AWS_LAMBDA_FUNCTION_RUNTIME }}
     steps:
       - name: "Create bucket_name_suffix Output"
         id: bucket_name_suffix
