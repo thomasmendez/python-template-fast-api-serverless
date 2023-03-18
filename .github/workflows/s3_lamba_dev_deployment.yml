@@ -67,7 +67,9 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       
       - name: Create .env
-        run: echo "ENV=dev" > .env
+        run: | 
+          echo "ENV=dev" > .env
+          mv .env ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
 
       # TODO: Add tests
       # - name: Test with pytest
