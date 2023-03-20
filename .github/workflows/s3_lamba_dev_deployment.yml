@@ -81,7 +81,6 @@ jobs:
       - name: Create .env
         run: | 
           echo "ENV=dev" > .env
-          mv .env ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
           
       # - name: Create .env
       #   run: | 
