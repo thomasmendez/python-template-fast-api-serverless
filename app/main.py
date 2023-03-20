@@ -16,7 +16,10 @@ if env != None and env != "local" :
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {
+        "message": "Hello World",
+        "environment": env,
+    }
 
 app.include_router(api_router, prefix="/api/v1")
 # handler = Mangum(app.include_router(APIRouter(prefix="/api/v1")))
