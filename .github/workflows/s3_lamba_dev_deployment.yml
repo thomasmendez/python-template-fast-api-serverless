@@ -108,8 +108,8 @@ jobs:
       - name: Create dist Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: home/runner/${{ needs.pre_build.outputs.DIST_NAME }}
-          path: ${{ needs.pre_build.outputs.DIST_PATH }}
+          name: ${{ needs.pre_build.outputs.DIST_NAME }}
+          path: home/runner/${{ needs.pre_build.outputs.DIST_PATH }}
           retention-days: 1
           
   deploy:
