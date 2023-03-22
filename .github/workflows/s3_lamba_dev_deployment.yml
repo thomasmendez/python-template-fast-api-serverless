@@ -92,11 +92,14 @@ jobs:
 
       - name: Zip output
         run: |
+          ls
           pwd
           cd /home/runner/.local/lib/python3.10/site-packages
-          zip -r9 function.zip .
+          ls
+          zip -r function.zip .
+          ls
           pwd
-          cd
+          ls
           zip -g function.zip -r ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws/app
 
       - name: Create dist Artifact
