@@ -103,13 +103,14 @@ jobs:
           pwd
           ls
           zip -g function.zip -r ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws/app
+          mv function.zip ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
 
 
       - name: Create dist Artifact
         uses: actions/upload-artifact@v3
         with:
           name: ${{ needs.pre_build.outputs.DIST_NAME }}
-          path: home/runner/${{ needs.pre_build.outputs.DIST_PATH }}
+          path: ${{ needs.pre_build.outputs.DIST_PATH }}
           retention-days: 1
           
   deploy:
