@@ -97,6 +97,7 @@ jobs:
           cd /home/runner/.local/lib/python3.10/site-packages
           ls
           zip -r function.zip .
+          mv function.zip /home/runner
           cd
           ls
           pwd
