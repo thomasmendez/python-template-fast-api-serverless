@@ -102,7 +102,7 @@ jobs:
           ls
           pwd
           ls
-          zip -g function.zip -r ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws/app
+          zip -gr function.zip ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws/app
           mv function.zip ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
 
 
