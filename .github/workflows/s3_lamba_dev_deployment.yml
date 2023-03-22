@@ -102,6 +102,7 @@ jobs:
           pwd
           ls
           cd ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
+          echo "ENV=dev" > ./app/.env
           zip -g function.zip -r ./app
 
       - name: Create dist Artifact
