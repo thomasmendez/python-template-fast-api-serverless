@@ -44,15 +44,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - name: Use Python
-      #   uses: actions/setup-python@v4
-      #   id: cp310
-      #   with:
-      #     python-version: '3.10.10'
-      #     cache: 'pip'
-      # - run: pip install -r requirements.txt
-      # - run: pipx run --python '${{ steps.cp310.outputs.python-path }}' nox --version
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -65,11 +56,6 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      
-      # TODO: Add tests
-      # - name: Test with pytest
-      #   run: |
-      #     pytest
 
       - name: Make Virtual Environment
         run: |
@@ -78,29 +64,14 @@ jobs:
           source env/bin/activate
           echo "VIRTUAL ENV:" $VIRTUAL_ENV
 
-      - name: Create .env
-        run: | 
-          echo "ENV=dev" > .env
-          
-      # - name: Create .env
-      #   run: | 
-      #     echo "ENV=dev" > .env
-      #     mv .env ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
-
       - name: Install zip
         uses: montudor/action-zip@v1
 
       - name: Zip output
         run: |
-          ls
-          pwd
           cd /home/runner/.local/lib/python3.10/site-packages
-          ls
           zip -r function.zip .
           mv function.zip /home/runner/work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
-          cd
-          pwd
-          ls
           cd ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
           echo "ENV=dev" > ./app/.env
           zip -g function.zip -r ./app
