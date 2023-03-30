@@ -1,19 +1,18 @@
-name: Development.yml CI
-
+name: Production.yml CI
 on:
   push:
-    branches-ignore:
+    branches:
       - main
 
 jobs:
   pre_build:
     runs-on: ubuntu-latest
     env:
-      AWS_BUCKET_NAME: python-template-fast-api-serverless-aws-dev
-      DIST_NAME: function-dev
+      AWS_BUCKET_NAME: python-template-fast-api-serverless-aws-prd
+      DIST_NAME: function-prd
       DIST_PATH: function.zip
       AWS_LAMBDA_FUNCTION_S3_KEY: function.zip
-      AWS_LAMBDA_FUNCTION_NAME: python-template-fast-api-serverless-aws-dev
+      AWS_LAMBDA_FUNCTION_NAME: python-template-fast-api-serverless-aws-prd
       AWS_LAMBDA_FUNCTION_HANDLER: app.main.handler
       AWS_LAMBDA_FUNCTION_RUNTIME: python3.9
     outputs:
@@ -74,7 +73,7 @@ jobs:
           mv function.zip /home/runner/work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
           cd
           cd ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
-          echo "ENV=dev" > ./app/.env
+          echo "ENV=prd" > ./app/.env
           zip -g function.zip -r ./app
 
       - name: Create dist Artifact
@@ -86,7 +85,7 @@ jobs:
           
   deploy:
     needs: [pre_build, build]
-    uses: thomasmendez/workflows/.github/workflows/s3_lamda_dev_deployment.yml@main
+    uses: thomasmendez/workflows/.github/workflows/s3_lamda_prd_deployment.yml@main
     with:
       AWS_BUCKET_NAME: ${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}
       DIST_NAME: ${{ needs.pre_build.outputs.DIST_NAME }}
