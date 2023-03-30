@@ -26,7 +26,7 @@ jobs:
       - name: "Create bucket_name_suffix Output"
         id: bucket_name_suffix
         run: |
-          suffix=$(echo ${{ github.ref_name }} | sed 's/\//-/')
+          suffix=$(echo ${{ github.head_ref }} | sed 's/\//-/')
           echo "suffix=$suffix" >> $GITHUB_OUTPUT
 
       - name: "Create bucket_name Output"
