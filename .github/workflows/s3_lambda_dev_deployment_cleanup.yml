@@ -37,7 +37,7 @@ jobs:
           
   destroy:
     needs: pre_destroy
-    uses: thomasmendez/workflows/.github/workflows/s3_lamda_dev_deployment_cleanup.yml@main
+    uses: thomasmendez/workflows/.github/workflows/s3_lambda_dev_deployment_cleanup.yml@main
     with:
       AWS_BUCKET_NAME: ${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}
       DIST_NAME: ${{ needs.pre_build.outputs.DIST_NAME }}

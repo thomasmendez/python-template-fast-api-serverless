@@ -1,8 +1,5 @@
 name: Production.yml CI
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
   pre_build:
