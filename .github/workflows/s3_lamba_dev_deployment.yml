@@ -72,6 +72,7 @@ jobs:
           cd /home/runner/.local/lib/python3.10/site-packages
           zip -r function.zip .
           mv function.zip /home/runner/work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
+          cd
           cd ./work/python-template-fast-api-serverless-aws/python-template-fast-api-serverless-aws
           echo "ENV=dev" > ./app/.env
           zip -g function.zip -r ./app
