@@ -21,16 +21,10 @@ jobs:
       AWS_LAMBDA_FUNCTION_HANDLER: ${{ env.AWS_LAMBDA_FUNCTION_HANDLER }}
       AWS_LAMBDA_FUNCTION_RUNTIME: ${{ env.AWS_LAMBDA_FUNCTION_RUNTIME }}
     steps:
-      - name: "Create bucket_name_suffix Output"
-        id: bucket_name_suffix
-        run: |
-          suffix=$(echo ${{ github.ref_name }} | sed 's/\//-/')
-          echo "suffix=$suffix" >> $GITHUB_OUTPUT
-
       - name: "Create bucket_name Output"
         id: bucket_name
         run: |
-          bucket_name=$(echo ${{ env.AWS_BUCKET_NAME }}-${{ steps.bucket_name_suffix.outputs.suffix }})
+          bucket_name=$(echo ${{ env.AWS_BUCKET_NAME }})
           echo "bucket=$bucket_name" >> $GITHUB_OUTPUT
 
   build:
