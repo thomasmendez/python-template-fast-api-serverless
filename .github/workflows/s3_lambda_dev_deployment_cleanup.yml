@@ -39,11 +39,11 @@ jobs:
     needs: pre_destroy
     uses: thomasmendez/workflows/.github/workflows/s3_lambda_dev_deployment_cleanup.yml@main
     with:
-      AWS_BUCKET_NAME: ${{ needs.pre_build.outputs.AWS_BUCKET_NAME }}
-      AWS_LAMBDA_FUNCTION_S3_KEY: ${{ needs.pre_build.outputs.AWS_LAMBDA_FUNCTION_S3_KEY }}
-      AWS_LAMBDA_FUNCTION_NAME: ${{ needs.pre_build.outputs.AWS_LAMBDA_FUNCTION_NAME }}
-      AWS_LAMBDA_FUNCTION_HANDLER: ${{ needs.pre_build.outputs.AWS_LAMBDA_FUNCTION_HANDLER }}
-      AWS_LAMBDA_FUNCTION_RUNTIME: ${{ needs.pre_build.outputs.AWS_LAMBDA_FUNCTION_RUNTIME }}
+      AWS_BUCKET_NAME: ${{ needs.pre_destroy.outputs.AWS_BUCKET_NAME }}
+      AWS_LAMBDA_FUNCTION_S3_KEY: ${{ needs.pre_destroy.outputs.AWS_LAMBDA_FUNCTION_S3_KEY }}
+      AWS_LAMBDA_FUNCTION_NAME: ${{ needs.pre_destroy.outputs.AWS_LAMBDA_FUNCTION_NAME }}
+      AWS_LAMBDA_FUNCTION_HANDLER: ${{ needs.pre_destroy.outputs.AWS_LAMBDA_FUNCTION_HANDLER }}
+      AWS_LAMBDA_FUNCTION_RUNTIME: ${{ needs.pre_destroy.outputs.AWS_LAMBDA_FUNCTION_RUNTIME }}
     secrets:
       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
