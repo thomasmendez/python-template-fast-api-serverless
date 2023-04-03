@@ -15,7 +15,7 @@ jobs:
       AWS_LAMBDA_FUNCTION_NAME: python-template-fast-api-serverless-aws-stg
       AWS_LAMBDA_FUNCTION_HANDLER: app.main.handler
       AWS_LAMBDA_FUNCTION_RUNTIME: python3.9
-      AWS_LAMBDA_API_GATEWAY_ID: 140fgm5c30
+      AWS_LAMBDA_API_GATEWAY_ID: 4w0ydiml2l
     outputs:
       AWS_BUCKET_NAME: ${{ steps.bucket_name.outputs.bucket }}
       DIST_NAME: ${{ env.DIST_NAME }}
