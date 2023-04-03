@@ -9,30 +9,23 @@ jobs:
       DIST_NAME: function-prd
       DIST_PATH: function.zip
       AWS_LAMBDA_FUNCTION_S3_KEY: function.zip
+      AWS_LAMBDA_FUNCTION_NAME: python-template-fast-api-serverless-aws-prd
       AWS_LAMBDA_FUNCTION_HANDLER: app.main.handler
       AWS_LAMBDA_FUNCTION_RUNTIME: python3.9
-      AWS_LAMBDA_API_GATEWAY_ID: 4w0ydiml2l
     outputs:
       AWS_BUCKET_NAME: ${{ steps.bucket_name.outputs.bucket }}
       DIST_NAME: ${{ env.DIST_NAME }}
       DIST_PATH: ${{ env.DIST_PATH }}
       AWS_LAMBDA_FUNCTION_S3_KEY: ${{ env.AWS_LAMBDA_FUNCTION_S3_KEY }}
-      AWS_LAMBDA_FUNCTION_NAME: ${{ steps.lambda_function_name.outputs.lambda_function }}
+      AWS_LAMBDA_FUNCTION_NAME: ${{ env.AWS_LAMBDA_FUNCTION_NAME }}
       AWS_LAMBDA_FUNCTION_HANDLER: ${{ env.AWS_LAMBDA_FUNCTION_HANDLER }}
       AWS_LAMBDA_FUNCTION_RUNTIME: ${{ env.AWS_LAMBDA_FUNCTION_RUNTIME }}
-      AWS_LAMBDA_API_GATEWAY_ID: ${{ env.AWS_LAMBDA_API_GATEWAY_ID }}
     steps:
       - name: "Create bucket_name Output"
         id: bucket_name
         run: |
           bucket_name=$(echo ${{ env.AWS_BUCKET_NAME }})
           echo "bucket=$bucket_name" >> $GITHUB_OUTPUT
-
-      - name: "Create lambda_function_name Output"
-        id: lambda_function_name
-        run: |
-          lambda_function_name=$(echo ${{ steps.bucket_name.outputs.bucket }})
-          echo "lambda_function=$lambda_function_name" >> $GITHUB_OUTPUT
 
   build:
     runs-on: ubuntu-latest
@@ -92,7 +85,6 @@ jobs:
       AWS_LAMBDA_FUNCTION_NAME: ${{ needs.pre_build.outputs.AWS_LAMBDA_FUNCTION_NAME }}
       AWS_LAMBDA_FUNCTION_HANDLER: ${{ needs.pre_build.outputs.AWS_LAMBDA_FUNCTION_HANDLER }}
       AWS_LAMBDA_FUNCTION_RUNTIME: ${{ needs.pre_build.outputs.AWS_LAMBDA_FUNCTION_RUNTIME }}
-      AWS_LAMBDA_API_GATEWAY_ID: ${{ needs.pre_build.outputs.AWS_LAMBDA_API_GATEWAY_ID }}
     secrets:
       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

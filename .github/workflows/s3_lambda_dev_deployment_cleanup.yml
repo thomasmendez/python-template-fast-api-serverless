@@ -11,6 +11,7 @@ jobs:
       DIST_NAME: function-dev
       DIST_PATH: function.zip
       AWS_LAMBDA_FUNCTION_S3_KEY: function.zip
+      AWS_LAMBDA_FUNCTION_NAME: python-template-fast-api-serverless-aws-dev
       AWS_LAMBDA_FUNCTION_HANDLER: app.main.handler
       AWS_LAMBDA_FUNCTION_RUNTIME: python3.9
     outputs:
@@ -18,7 +19,7 @@ jobs:
       DIST_NAME: ${{ env.DIST_NAME }}
       DIST_PATH: ${{ env.DIST_PATH }}
       AWS_LAMBDA_FUNCTION_S3_KEY: ${{ env.AWS_LAMBDA_FUNCTION_S3_KEY }}
-      AWS_LAMBDA_FUNCTION_NAME: ${{ steps.lambda_function_name.outputs.lambda_function }}
+      AWS_LAMBDA_FUNCTION_NAME: ${{ env.AWS_LAMBDA_FUNCTION_NAME }}
       AWS_LAMBDA_FUNCTION_HANDLER: ${{ env.AWS_LAMBDA_FUNCTION_HANDLER }}
       AWS_LAMBDA_FUNCTION_RUNTIME: ${{ env.AWS_LAMBDA_FUNCTION_RUNTIME }}
     steps:
@@ -33,12 +34,6 @@ jobs:
         run: |
           bucket_name=$(echo ${{ env.AWS_BUCKET_NAME }}-${{ steps.bucket_name_suffix.outputs.suffix }})
           echo "bucket=$bucket_name" >> $GITHUB_OUTPUT
-
-      - name: "Create lambda_function_name Output"
-        id: lambda_function_name
-        run: |
-          lambda_function_name=$(echo ${{ steps.bucket_name.outputs.bucket }})
-          echo "lambda_function=$lambda_function_name" >> $GITHUB_OUTPUT
           
   destroy:
     needs: pre_destroy
