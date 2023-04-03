@@ -15,6 +15,7 @@ jobs:
       AWS_LAMBDA_FUNCTION_NAME: python-template-fast-api-serverless-aws-stg
       AWS_LAMBDA_FUNCTION_HANDLER: app.main.handler
       AWS_LAMBDA_FUNCTION_RUNTIME: python3.9
+      AWS_LAMBDA_API_GATEWAY_ID: 1t8l3r2hcb
     outputs:
       AWS_BUCKET_NAME: ${{ steps.bucket_name.outputs.bucket }}
       DIST_NAME: ${{ env.DIST_NAME }}
@@ -23,6 +24,7 @@ jobs:
       AWS_LAMBDA_FUNCTION_NAME: ${{ env.AWS_LAMBDA_FUNCTION_NAME }}
       AWS_LAMBDA_FUNCTION_HANDLER: ${{ env.AWS_LAMBDA_FUNCTION_HANDLER }}
       AWS_LAMBDA_FUNCTION_RUNTIME: ${{ env.AWS_LAMBDA_FUNCTION_RUNTIME }}
+      AWS_LAMBDA_API_GATEWAY_ID: ${{ env.AWS_LAMBDA_API_GATEWAY_ID }}
     steps:
       - name: "Create bucket_name Output"
         id: bucket_name
@@ -88,6 +90,7 @@ jobs:
       AWS_LAMBDA_FUNCTION_NAME: ${{ needs.pre_build.outputs.AWS_LAMBDA_FUNCTION_NAME }}
       AWS_LAMBDA_FUNCTION_HANDLER: ${{ needs.pre_build.outputs.AWS_LAMBDA_FUNCTION_HANDLER }}
       AWS_LAMBDA_FUNCTION_RUNTIME: ${{ needs.pre_build.outputs.AWS_LAMBDA_FUNCTION_RUNTIME }}
+      AWS_LAMBDA_API_GATEWAY_ID: ${{ needs.pre_build.outputs.AWS_LAMBDA_API_GATEWAY_ID }}
     secrets:
       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
